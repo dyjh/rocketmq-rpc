@@ -1,4 +1,4 @@
-package simple
+package main
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	newPushConsumer, err := rocketmq.NewPushConsumer(consumer.WithNameServer([]string{"192.168.193.128:9876"}), consumer.WithGroupName("test"))
+	newPushConsumer, err := rocketmq.NewPushConsumer(consumer.WithNameServer([]string{"101.34.43.160:9876"}), consumer.WithGroupName("test"))
 	defer func(newPushConsumer rocketmq.PushConsumer) {
 		err := newPushConsumer.Shutdown()
 		if err != nil {
@@ -18,7 +18,7 @@ func main() {
 		}
 	}(newPushConsumer)
 
-	err = newPushConsumer.Subscribe("SimpleTopic", consumer.MessageSelector{}, func(ctx context.Context, msgs ...*primitive.MessageExt) (consumer.ConsumeResult, error) {
+	err = newPushConsumer.Subscribe("DelayTopic", consumer.MessageSelector{}, func(ctx context.Context, msgs ...*primitive.MessageExt) (consumer.ConsumeResult, error) {
 		for _, msg := range msgs {
 			nowStr := time.Now().Format("2006-01-02 15:04:05")
 			fmt.Printf("%s 读取到一条消息,消息内容: %s \n", nowStr, string(msg.Body))
