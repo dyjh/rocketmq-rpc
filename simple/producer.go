@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func PushSimple(topic string, messageData string) bool {
+func PushSimple(messageData string) bool {
 	// 消息消费失败重试两次
 	newProducer, err := rocketmq.NewProducer(producer.WithNameServer([]string{"10.0.4.9:9876"}), producer.WithRetry(2))
 
@@ -22,7 +22,7 @@ func PushSimple(topic string, messageData string) bool {
 		return false
 	}
 
-	res, err := newProducer.SendSync(context.Background(), primitive.NewMessage("SimpleTopic", []byte("一条简单消息")))
+	res, err := newProducer.SendSync(context.Background(), primitive.NewMessage("SimpleTopic", []byte(messageData)))
 	if err != nil {
 		fmt.Printf("消息发送失败" + err.Error())
 		return false

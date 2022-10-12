@@ -21,7 +21,7 @@ type RocketService struct {
 
 // 定义 RocketService 所需要的参数，一般是两个，string 类型
 type Args struct {
-	Topic, Message string
+	Message string
 }
 
 // 2.
@@ -30,13 +30,13 @@ type Args struct {
 // 第二个参数用于处理返回结果，是一个指针
 // 所有的 jsonrpc 都只有一个返回值，error,用于指示是否发生错误
 func (that *RocketService) Delay(args Args, reply *bool) error {
-	*reply = delay.PushDelay(args.Topic, args.Message)
+	*reply = delay.PushDelay(args.Message)
 	return nil
 }
 
 // 实现即时推送服务
 func (that *RocketService) Simple(args Args, reply *bool) error {
-	*reply = simple.PushSimple(args.Topic, args.Message)
+	*reply = simple.PushSimple(args.Message)
 	return nil
 }
 
