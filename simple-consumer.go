@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	newPushConsumer, err := rocketmq.NewPushConsumer(consumer.WithNameServer([]string{"192.168.193.128:9876"}), consumer.WithGroupName("test"))
+	newPushConsumer, err := rocketmq.NewPushConsumer(consumer.WithNameServer([]string{"10.0.4.9:9876"}), consumer.WithGroupName("test"))
 	defer func(newPushConsumer rocketmq.PushConsumer) {
 		err := newPushConsumer.Shutdown()
 		if err != nil {

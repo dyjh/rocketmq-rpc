@@ -32,7 +32,7 @@ func (t TestListener) CheckLocalTransaction(ext *primitive.MessageExt) primitive
 func main() {
 	newTransactionProducer, err := rocketmq.NewTransactionProducer(
 		&TestListener{},
-		producer.WithNameServer([]string{"192.168.193.128:9876"}),
+		producer.WithNameServer([]string{"10.0.4.9:9876"}),
 	)
 	defer func(newProducer rocketmq.TransactionProducer) {
 		err := newProducer.Shutdown()
